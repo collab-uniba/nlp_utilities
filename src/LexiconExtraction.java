@@ -1,3 +1,7 @@
+
+import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.process.CoreLabelTokenFactory;
+import edu.stanford.nlp.process.PTBTokenizer;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -5,18 +9,21 @@ import java.util.*;
 
 public class LexiconExtraction {
 
-    private Tokenizer t = new Tokenizer();
+    private CreateNGrams t = new CreateNGrams();
 
     /**
      * Counts the occurrences of every Ngrams of the input text.
+     *
      * @return a map of n-grams and occurrences
+     *
      */
-    public SortedMap<String, Integer> getNgramsOccurrences(File f, int n) throws Exception{
+    public SortedMap<String, Integer> getNgramsOccurrences(File f, int n) throws Exception {
         BufferedReader br = new BufferedReader(new FileReader(f));
-        String line; int temp;
+        String line;
+        int temp;
         Map<String, Integer> ngramsLine;
         SortedMap<String, Integer> ngramsText = new TreeMap<>();
-        while((line = br.readLine()) != null) {
+        while ((line = br.readLine()) != null) {
             temp = 0;
             ngramsLine = getNgramsOccurrences(line.toLowerCase(), 1);
             for (String s : ngramsLine.keySet()) {
@@ -25,7 +32,7 @@ public class LexiconExtraction {
                 } else {
                     temp = ngramsText.get(s);
                     ngramsText.remove(s);
-                    ngramsText.put(s, temp+1);
+                    ngramsText.put(s, temp + 1);
                 }
             }
         }
@@ -34,6 +41,7 @@ public class LexiconExtraction {
 
     /**
      * Counts the occurrences of every Ngrams of the input string.
+     *
      * @return a map of n-grams and occurrences
      */
     private Map<String, Integer> getNgramsOccurrences(String input, int n) {

@@ -8,7 +8,7 @@ public class OccurrencesCount {
     private LexiconExtraction lex = new LexiconExtraction();
 
     /**
-     * Given a input corput and list of n-grams,
+     * Given a input corpus and list of n-grams,
      * @return a map of list's n-grams with their occurrences in the input corpus
      */
     public SortedMap<String, Integer> getOccurrences(File input, int n, File list) throws Exception {
